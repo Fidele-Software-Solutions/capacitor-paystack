@@ -1,0 +1,6 @@
+
+  <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.fideleapps.capacitor.plugin.capacitorpaystackplugin">
+      <uses-permission android:name="android.permission.INTERNET" />
+  </manifest>
+  
