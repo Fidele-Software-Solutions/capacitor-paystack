@@ -1,1 +1,5 @@
 node_modules/*
+.idea/*
+/nbproject/private/
+/android/build/*
+/dist/*
