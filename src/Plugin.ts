@@ -44,7 +44,6 @@ export class PaystackPlugin implements PaystackCapacitorPlugin {
     }
 
     chargeCard(): Promise<{ reference: Transaction; }> { 
-        console.log('Charging card');
         return PaystackCapacitor.chargeCard();
     }
 
