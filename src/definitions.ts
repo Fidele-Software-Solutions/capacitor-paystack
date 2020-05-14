@@ -63,4 +63,5 @@ export interface PaystackCapacitorPlugin {
   putChargeCustomFields(customFields: {[key: string]: string}): void;
   setChargeEmail(email: string): void;
   setChargeAmount(amount: string): void;
+  setAccessCode(accessCode: string): void;
 }

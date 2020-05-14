@@ -25,6 +25,10 @@ export class PaystackPlugin implements PaystackCapacitorPlugin {
         return PaystackCapacitor.setChargeEmail({email});
     }
 
+    setAccessCode(accessCode: string): void {
+        return PaystackCapacitor.setAccessCode({accessCode});
+    }
+
     setChargeAmount(amount: string): void {
         return PaystackCapacitor.setChargeAmount({amount});
     }
