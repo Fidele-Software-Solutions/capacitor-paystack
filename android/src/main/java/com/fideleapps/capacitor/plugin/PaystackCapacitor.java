@@ -31,63 +31,88 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void initialize(PluginCall call) {
-        this.publicKey = call.getString("publicKey");
-        this.card = null;
-        this.charge = new Charge();
-        PaystackSdk.initialize(getContext());
-        PaystackSdk.setPublicKey(publicKey);
+        try {
+            this.publicKey = call.getString("publicKey");
+            PaystackSdk.initialize(getContext());
+            PaystackSdk.setPublicKey(publicKey);
+            this.card = null;
+            this.charge = null;
+            JSObject ret = new JSObject();
+            ret.put("initialized", true);
+            call.success(ret);
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
+    }
 
-        JSObject ret = new JSObject();
-        ret.put("initialized", true);
-        call.success(ret);
+    @PluginMethod()
+    public void addCard(PluginCall call) {
+        try {
+            String cardNumber = call.getString("cardNumber");
+            int expiryMonth = Integer.parseInt(call.getString("expiryMonth"));
+            int expiryYear = Integer.parseInt(call.getString("expiryYear"));
+            String cvv = call.getString("cvv");
+            this.charge = new Charge();
+            this.card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
+            call.success();
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
+
     }
 
     @PluginMethod()
     public void validateCard(PluginCall call) {
-        String cardNumber = call.getString("cardNumber");
-        int expiryMonth = Integer.parseInt(call.getString("expiryMonth"));
-        int expiryYear = Integer.parseInt(call.getString("expiryYear"));
-        String cvv = call.getString("cvv");
-
-        this.card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
-        JSObject ret = new JSObject();
-        ret.put("is_valid", card.isValid());
-        call.success(ret);
+        try {
+            JSObject ret = new JSObject();
+            ret.put("is_valid", card.isValid());
+            call.success(ret);
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @PluginMethod()
-    public void addChargeParameters(PluginCall call) throws NullPointerException {
+    public void addChargeParameters(PluginCall call) {
         final JSObject params = call.getData();
         params.keys().forEachRemaining(new Consumer<String>() {
             @Override
             public void accept(String paramKey) {
-                PaystackCapacitor.this.charge.addParameter(paramKey, params.getString(paramKey));
+                try {
+                    PaystackCapacitor.this.charge.addParameter(paramKey, params.getString(paramKey));
+                } catch (NullPointerException ex) {
+                    call.errorCallback(ex.getMessage());
+                    return;
+                }
+
             }
         });
         call.success();
     }
 
     @PluginMethod()
-    public void getCardType(PluginCall call) throws NullPointerException {
-        if(this.card == null) {
-            throw new NullPointerException();
+    public void getCardType(PluginCall call) {
+        try {
+            JSObject ret = new JSObject();
+            ret.put("card_type", card.getType());
+            call.success(ret);
+        } catch (NullPointerException ex) {
+            call.errorCallback(ex.getMessage());
         }
-        JSObject ret = new JSObject();
-        ret.put("card_type", card.getType());
-        call.success(ret);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @PluginMethod()
-    public void putChargeMetadata(final PluginCall call) throws JSONException, NullPointerException {
+    public void putChargeMetadata(final PluginCall call) {
         final JSObject params = call.getData();
         params.keys().forEachRemaining(new Consumer<String>() {
             @Override
             public void accept(String paramKey) {
                 try {
                     PaystackCapacitor.this.charge.putMetadata(paramKey, params.getString(paramKey));
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     call.errorCallback(e.getMessage());
                 }
             }
@@ -97,14 +122,14 @@ public class PaystackCapacitor extends Plugin {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @PluginMethod()
-    public void putChargeCustomFields(final PluginCall call) throws JSONException, NullPointerException {
+    public void putChargeCustomFields(final PluginCall call) {
         final JSObject params = call.getData();
         params.keys().forEachRemaining(new Consumer<String>() {
             @Override
             public void accept(String paramKey) {
                 try {
                     PaystackCapacitor.this.charge.putCustomField(paramKey, params.getString(paramKey));
-                } catch (JSONException e) {
+                } catch (Exception e) {
                     call.errorCallback(e.getMessage());
                 }
             }
@@ -114,21 +139,38 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void setChargeEmail(PluginCall call) {
-        this.email = call.getString("email");
-        call.success();
+        try {
+            this.email = call.getString("email");
+            call.success();
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
     }
 
     @PluginMethod()
     public void setChargeAmount(PluginCall call) {
-        this.amount = Integer.parseInt(call.getString("amount"));
-        call.success();
+        try {
+            this.amount = Integer.parseInt(call.getString("amount"));
+            call.success();
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
     }
 
     @PluginMethod()
-    public void chargeCard(final PluginCall call) throws NullPointerException {
-        if(this.card == null) {
-            throw new NullPointerException();
+    public void setAccessCode(PluginCall call) {
+        try {
+            String accessCode = call.getString("accessCode");
+            charge.setAccessCode(accessCode);
+            call.success();
+        } catch (NullPointerException ex) {
+            call.errorCallback(ex.getMessage());
         }
+
+    }
+
+    @PluginMethod()
+    public void chargeCard(final PluginCall call) {
         this.charge = new Charge();
         charge.setCard(this.card); //sets the card to charge
         charge.setAmount(this.amount);
@@ -147,7 +189,7 @@ public class PaystackCapacitor extends Plugin {
 
             @Override
             public void onError(Throwable error, Transaction transaction) {
-                call.errorCallback(error.toString());
+                call.errorCallback(error.getMessage());
             }
         });
     }

@@ -5,7 +5,7 @@ const { PaystackCapacitor } = Plugins;
 
 export class PaystackPlugin implements PaystackCapacitorPlugin {
 
-    addChargeParameters(parameters: { [key: string]: string; }): void {
+    addChargeParameters(parameters: { [key: string]: string; }): Promise<any> {
         return PaystackCapacitor.addChargeParameters(parameters);
     }
 
@@ -13,19 +13,23 @@ export class PaystackPlugin implements PaystackCapacitorPlugin {
         return PaystackCapacitor.getCardType();
     }
 
-    putChargeMetadata(metadata: { [key: string]: string; }): void {
+    putChargeMetadata(metadata: { [key: string]: string; }): Promise<any> {
         return PaystackCapacitor.putChargeMetadata(metadata);
     }
 
-    putChargeCustomFields(customFields: { [key: string]: string; }): void {
+    putChargeCustomFields(customFields: { [key: string]: string; }): Promise<any> {
         return PaystackCapacitor.putChargeCustomFields(customFields);
     }
 
-    setChargeEmail(email: string): void {
+    setChargeEmail(email: string): Promise<any> {
         return PaystackCapacitor.setChargeEmail({email});
     }
 
-    setChargeAmount(amount: string): void {
+    setAccessCode(accessCode: string): Promise<any> {
+        return PaystackCapacitor.setAccessCode({accessCode});
+    }
+
+    setChargeAmount(amount: string): Promise<any> {
         return PaystackCapacitor.setChargeAmount({amount});
     }
 
@@ -33,17 +37,21 @@ export class PaystackPlugin implements PaystackCapacitorPlugin {
         return PaystackCapacitor.initialize({publicKey});
     }
 
-    validateCard(cardNumber: string, expiryMonth: string, expiryYear: string, cvv: string): Promise<{ is_valid: boolean; }> {
+    addCard(cardNumber: string, expiryMonth: string, expiryYear: string, cvv: string): Promise<any> {
         const cardData = {
             cardNumber,
             expiryMonth,
             expiryYear,
             cvv
         }
-        return PaystackCapacitor.validateCard(cardData);
+        return PaystackCapacitor.addCard(cardData);
+    }
+    
+    validateCard(): Promise<{ is_valid: boolean; }> {
+        return PaystackCapacitor.validateCard();
     }
 
-    chargeCard(): Promise<{ reference: Transaction; }> { 
+    chargeCard(): Promise<Transaction> { 
         return PaystackCapacitor.chargeCard();
     }
 

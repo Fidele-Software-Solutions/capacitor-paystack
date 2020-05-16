@@ -55,12 +55,14 @@ export abstract class PaystackCharge {
 
 export interface PaystackCapacitorPlugin {
   initialize(publicKey: string): Promise<{initialized: boolean}>;
-  validateCard(cardNumber: string, expiryMonth: string, expiryYear: string, cvv: string): Promise<{is_valid: boolean}>;
-  chargeCard(): Promise<{reference: Transaction}>;
-  addChargeParameters(parameters: {[key: string]: string}): void;
+  addCard(cardNumber: string, expiryMonth: string, expiryYear: string, cvv: string): Promise<any>;
+  validateCard(): Promise<{is_valid: boolean}>;
+  chargeCard(): Promise<Transaction>;
+  addChargeParameters(parameters: {[key: string]: string}): Promise<any>;
   getCardType(): Promise<{card_type: string}>;
-  putChargeMetadata(metadata: {[key: string]: string}): void;
-  putChargeCustomFields(customFields: {[key: string]: string}): void;
-  setChargeEmail(email: string): void;
-  setChargeAmount(amount: string): void;
+  putChargeMetadata(metadata: {[key: string]: string}): Promise<any>;
+  putChargeCustomFields(customFields: {[key: string]: string}): Promise<any>;
+  setChargeEmail(email: string): Promise<any>;
+  setChargeAmount(amount: string): Promise<any>;
+  setAccessCode(accessCode: string): Promise<any>;
 }
