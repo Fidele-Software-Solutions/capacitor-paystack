@@ -31,28 +31,45 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void initialize(PluginCall call) {
-        this.publicKey = call.getString("publicKey");
-        this.card = null;
-        this.charge = new Charge();
-        PaystackSdk.initialize(getContext());
-        PaystackSdk.setPublicKey(publicKey);
+        try {
+            this.publicKey = call.getString("publicKey");
+            PaystackSdk.initialize(getContext());
+            PaystackSdk.setPublicKey(publicKey);
+            this.card = null;
+            this.charge = null;
+            JSObject ret = new JSObject();
+            ret.put("initialized", true);
+            call.success(ret);
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
+    }
 
-        JSObject ret = new JSObject();
-        ret.put("initialized", true);
-        call.success(ret);
+    @PluginMethod()
+    public void addCard(PluginCall call) {
+        try {
+            String cardNumber = call.getString("cardNumber");
+            int expiryMonth = Integer.parseInt(call.getString("expiryMonth"));
+            int expiryYear = Integer.parseInt(call.getString("expiryYear"));
+            String cvv = call.getString("cvv");
+            this.charge = new Charge();
+            this.card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
+            call.success();
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
+
     }
 
     @PluginMethod()
     public void validateCard(PluginCall call) {
-        String cardNumber = call.getString("cardNumber");
-        int expiryMonth = Integer.parseInt(call.getString("expiryMonth"));
-        int expiryYear = Integer.parseInt(call.getString("expiryYear"));
-        String cvv = call.getString("cvv");
-
-        this.card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
-        JSObject ret = new JSObject();
-        ret.put("is_valid", card.isValid());
-        call.success(ret);
+        try {
+            JSObject ret = new JSObject();
+            ret.put("is_valid", card.isValid());
+            call.success(ret);
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -122,14 +139,22 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void setChargeEmail(PluginCall call) {
-        this.email = call.getString("email");
-        call.success();
+        try {
+            this.email = call.getString("email");
+            call.success();
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
     }
 
     @PluginMethod()
     public void setChargeAmount(PluginCall call) {
-        this.amount = Integer.parseInt(call.getString("amount"));
-        call.success();
+        try {
+            this.amount = Integer.parseInt(call.getString("amount"));
+            call.success();
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
     }
 
     @PluginMethod()
@@ -164,7 +189,7 @@ public class PaystackCapacitor extends Plugin {
 
             @Override
             public void onError(Throwable error, Transaction transaction) {
-                call.errorCallback(error.toString());
+                call.errorCallback(error.getMessage());
             }
         });
     }
