@@ -12,8 +12,7 @@ import com.getcapacitor.PluginMethod;
 
 import org.json.JSONException;
 
-import java.io.Console;
-import java.util.logging.Logger;
+import java.util.function.Consumer;
 
 import co.paystack.android.Paystack;
 import co.paystack.android.PaystackSdk;
@@ -45,7 +44,6 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void validateCard(PluginCall call) {
-        // This sets up the card and check for validity
         String cardNumber = call.getString("cardNumber");
         int expiryMonth = Integer.parseInt(call.getString("expiryMonth"));
         int expiryYear = Integer.parseInt(call.getString("expiryYear"));
@@ -60,16 +58,13 @@ public class PaystackCapacitor extends Plugin {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @PluginMethod()
     public void addChargeParameters(PluginCall call) throws NullPointerException {
-        JSObject params = call.getData();
-        params.keys().forEachRemaining((String paramKey) -> {
-            System.out.println("Key: " + paramKey);
-            this.charge.addParameter(paramKey, params.getString(paramKey));
+        final JSObject params = call.getData();
+        params.keys().forEachRemaining(new Consumer<String>() {
+            @Override
+            public void accept(String paramKey) {
+                PaystackCapacitor.this.charge.addParameter(paramKey, params.getString(paramKey));
+            }
         });
-//        while (params.keys().hasNext()) {
-//            String key = params.keys().next();
-//            System.out.println("Key: " + key);
-//            this.charge.addParameter(key, params.getString(key));
-//        }
         call.success();
     }
 
@@ -85,41 +80,35 @@ public class PaystackCapacitor extends Plugin {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @PluginMethod()
-    public void putChargeMetadata(PluginCall call) throws JSONException, NullPointerException {
-        JSObject params = call.getData();
-        params.keys().forEachRemaining((String paramKey) -> {
-            System.out.println("Key: " + paramKey);
-            try {
-                this.charge.putMetadata(paramKey, params.getString(paramKey));
-            } catch (JSONException e) {
-                call.errorCallback(e.getMessage());
+    public void putChargeMetadata(final PluginCall call) throws JSONException, NullPointerException {
+        final JSObject params = call.getData();
+        params.keys().forEachRemaining(new Consumer<String>() {
+            @Override
+            public void accept(String paramKey) {
+                try {
+                    PaystackCapacitor.this.charge.putMetadata(paramKey, params.getString(paramKey));
+                } catch (JSONException e) {
+                    call.errorCallback(e.getMessage());
+                }
             }
         });
-//        while (params.keys().hasNext()) {
-//            String key = params.keys().next();
-//            System.out.println("Key: " + key);
-//            this.charge.putMetadata(key, params.getString(key));
-//        }
         call.success();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @PluginMethod()
-    public void putChargeCustomFields(PluginCall call) throws JSONException, NullPointerException {
-        JSObject params = call.getData();
-        params.keys().forEachRemaining((String paramKey) -> {
-            System.out.println("Key: " + paramKey);
-            try {
-                this.charge.putCustomField(paramKey, params.getString(paramKey));
-            } catch (JSONException e) {
-                call.errorCallback(e.getMessage());
+    public void putChargeCustomFields(final PluginCall call) throws JSONException, NullPointerException {
+        final JSObject params = call.getData();
+        params.keys().forEachRemaining(new Consumer<String>() {
+            @Override
+            public void accept(String paramKey) {
+                try {
+                    PaystackCapacitor.this.charge.putCustomField(paramKey, params.getString(paramKey));
+                } catch (JSONException e) {
+                    call.errorCallback(e.getMessage());
+                }
             }
         });
-//        while (params.keys().hasNext()) {
-//            String key = params.keys().next();
-//            System.out.println("Key: " + key);
-//            this.charge.putCustomField(key, params.getString(key));
-//        }
         call.success();
     }
 
@@ -137,8 +126,6 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void chargeCard(final PluginCall call) throws NullPointerException {
-        //create a Charge object
-
         if(this.card == null) {
             throw new NullPointerException();
         }
@@ -149,10 +136,6 @@ public class PaystackCapacitor extends Plugin {
         PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
             @Override
             public void onSuccess(Transaction transaction) {
-                // This is called only after transaction is deemed successful.
-                // Retrieve the transaction, and send its reference to your server
-                // for verification.
-                System.out.println("Trx Ref" + transaction.getReference());
                 JSObject ret = new JSObject();
                 ret.put("reference", transaction.getReference());
                 call.success(ret);
@@ -160,16 +143,10 @@ public class PaystackCapacitor extends Plugin {
 
             @Override
             public void beforeValidate(Transaction transaction) {
-                // This is called only before requesting OTP.
-                // Save reference so you may send to server. If
-                // error occurs with OTP, you should still verify on server.
             }
 
             @Override
             public void onError(Throwable error, Transaction transaction) {
-                //handle error here
-//                JSObject ret = new JSObject();
-//                ret.put("error", error.toString());
                 call.errorCallback(error.toString());
             }
         });
