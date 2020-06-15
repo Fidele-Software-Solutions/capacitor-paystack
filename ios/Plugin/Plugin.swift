@@ -10,11 +10,13 @@ import Paystack
 public class PaystackCapacitor: CAPPlugin {
     
     var publicKey: String!
+    var email: String!
+    var amount: String!
+    
     var cardParams: PSTCKCardParams! //.init()
     var charge: PSTCKTransactionParams!
     
     func getCallValue<T>(_ name: String, _ call: CAPPluginCall, _ type: T) -> T? {
-//        return call.get(name, MyAny(), nil) as? T
         return nil
     }
     
@@ -45,9 +47,6 @@ public class PaystackCapacitor: CAPPlugin {
     @objc func validateCard(_ call: CAPPluginCall) {
         // TODO: Fix issue
         return call.error("This functionality is currently not available on iOS")
-//        call.success([
-//            "is_valid": false // self.cardParams.validateCardReturningError() //self.card
-//        ])
     }
     
     @objc func addChargeParameters(_ call: CAPPluginCall) {
@@ -97,7 +96,30 @@ public class PaystackCapacitor: CAPPlugin {
         }
     }
     
+    @objc func setChargeEmail(_ call: CAPPluginCall) {
+        self.email = call.getString("email", "");
+        call.success()
+    }
     
+    @objc func setChargeAmount(_ call: CAPPluginCall) {
+        self.amount = call.getString("amount", "");
+        call.success()
+    }
+    
+    @objc func setAccessCode(_ call: CAPPluginCall) {
+        self.charge.access_code = call.getString("accessCode", "")!;
+        call.success()
+    }
+    
+    @objc func chargeCard(_ call: CAPPluginCall) {
+        PSTCKAPIClient.shared().chargeCard(self.cardParams, forTransaction: self.charge, on: self.bridge.viewController,
+               didEndWithError: { (error, reference) -> Void in
+                call.error("\(error)")
+            }, didRequestValidation: { (reference) -> Void in
+                // an OTP was requested, transaction has not yet succeeded
+            }, didTransactionSuccess: { (reference) -> Void in
+                // transaction may have succeeded, please verify on backend
+                call.success(["reference": reference])
+        })
+    }
 }
-
-struct MyAny: Any {}
