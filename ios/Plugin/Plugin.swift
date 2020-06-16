@@ -11,7 +11,7 @@ public class PaystackCapacitor: CAPPlugin {
     
     var publicKey: String!
     var email: String!
-    var amount: Int!
+    var amount: UInt!
     
     var cardParams: PSTCKCardParams! //.init()
     var charge: PSTCKTransactionParams!
@@ -77,12 +77,13 @@ public class PaystackCapacitor: CAPPlugin {
         params?.forEach { arg in
             let (key, value) = arg
             do {
+                print(key as! String)
                 try self.charge.setMetadataValue(value as! String, forKey: key as! String)
-                    call.success()
             } catch {
                 call.error("\(error)")
             }
         }
+        call.success()
     }
     
     @objc func putChargeCustomFields(_ call: CAPPluginCall) {
@@ -90,12 +91,14 @@ public class PaystackCapacitor: CAPPlugin {
         params?.forEach { arg in
             let (key, value) = arg
             do {
-                try self.charge.setCustomFieldValue(key as! String, displayedAs: value as! String)
-                    call.success()
+                print(key as! String)
+                try self.charge.setCustomFieldValue(value as! String, displayedAs: key as! String)
             } catch {
                 call.error("\(error)")
+                return
             }
         }
+        call.success()
     }
     
     @objc func setChargeEmail(_ call: CAPPluginCall) {
@@ -104,7 +107,7 @@ public class PaystackCapacitor: CAPPlugin {
     }
     
     @objc func setChargeAmount(_ call: CAPPluginCall) {
-        self.amount = Int(call.getString("amount", "0")!);
+        self.amount = UInt(call.getString("amount", "0")!);
         call.success()
     }
     
@@ -114,6 +117,9 @@ public class PaystackCapacitor: CAPPlugin {
     }
     
     @objc func chargeCard(_ call: CAPPluginCall) {
+        self.charge.amount = self.amount
+        self.charge.email = self.email
+        self.charge.currency = "NGN"
         PSTCKAPIClient.shared().chargeCard(self.cardParams, forTransaction: self.charge, on: self.bridge.viewController,
                didEndWithError: { (error, reference) -> Void in
                 call.error("\(error)")
