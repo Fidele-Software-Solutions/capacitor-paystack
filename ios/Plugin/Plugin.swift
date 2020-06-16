@@ -11,7 +11,7 @@ public class PaystackCapacitor: CAPPlugin {
     
     var publicKey: String!
     var email: String!
-    var amount: String!
+    var amount: Int!
     
     var cardParams: PSTCKCardParams! //.init()
     var charge: PSTCKTransactionParams!
@@ -52,7 +52,9 @@ public class PaystackCapacitor: CAPPlugin {
     @objc func addChargeParameters(_ call: CAPPluginCall) {
         let params = call.options as NSDictionary? as? NSMutableDictionary
         do {
-            try self.charge.setMetadataValueDict(params!, forKey: "custom_filters")
+            if params != nil {
+                try self.charge.setMetadataValueDict(params!, forKey: "custom_filters")
+            }
             call.success()
         } catch {
             call.error("\(error)")
@@ -102,7 +104,7 @@ public class PaystackCapacitor: CAPPlugin {
     }
     
     @objc func setChargeAmount(_ call: CAPPluginCall) {
-        self.amount = call.getString("amount", "");
+        self.amount = Int(call.getString("amount", "0")!);
         call.success()
     }
     
