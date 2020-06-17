@@ -3,7 +3,7 @@
   "version": "0.0.3-alpha",
   "description": "Paystack capacitor plugin for Android and iOS",
   "main": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "types": "dist/esm/index.d.tsb",
   "scripts": {
     "build": "npm run clean && tsc",
     "clean": "rimraf ./dist",
