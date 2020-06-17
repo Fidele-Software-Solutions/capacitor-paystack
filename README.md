@@ -7,7 +7,7 @@ This plugin enables seamless integration of the [Paystack SDK](https://github.co
 
 The project is still under active development and will soon be available on iOS. Also, pull requests are welcome.
 
-### Installing (Android)
+### Installation
 
 To install this plugin, run the NPM command below in your Capacitor project's root folder
 ```
@@ -19,42 +19,50 @@ Then open your project in Android Studio with
 npx cap open android
 ```
 
-and add the following line to the list of plugins in your project, if any
+or XCode with
+```
+npx cap open ios
+```
+
+### Configuration
+In your Android Studio project, add the following line to the list of plugins in your project, if any
 ```
 ...
 add(PaystackCapacitor.class);
 ```
 
-In your project folder, run the command below to update your Android Studio project
+In your project folder, run the command below to update your Android Studio/XCode project
 ```
 npx cap sync
 ```
 
 Setup complete!
 
-### Installing (iOS)
-Coming soon
-
-### Code example (Android)
+### Code example
 To charge a card, 
 ```
 //Import the paystack plugin
-import { PaystackPlugin } from 'capacitor-paystack-plugin';
+import { PaystackPlugin } from '@bot101/capacitor-paystack-plugin';
 
 //Create a paystack object
 const paystack: PaystackPlugin; = new PaystackPlugin();
 
 //Initialize the SDK with your Paystack public key (found in your account dashboard)
-await this.paystack.initialize("pk_public key here");
+await this.paystack.initialize({publicKey: "pk_public key here"});
 
 //Add customer card information
-await this.paystack.addCard(cardNum, expiryMonth, expiryYear, cvv);
+await this.paystack.addCard({
+  cardNumber: String(cardNumber),
+  expiryMonth: String(expiryMonth),
+  expiryYear: String(expiryYear),
+  cvv: String(cvv)
+});
 
 //Add the email to charge
 await this.paystack.setChargeEmail("email@address.com");
 
 //Set the amount to charge the card (in kobo)
-await this.paystack.setChargeAmount("10000");
+await this.paystack.setChargeAmount({amount: '1000000'});
 
 //Optionally add custom fields, metadata and charge parameters (more information in the Paystack docs)
 await this.paystack.putChargeCustomFields({customField1: "field1", customField2: "field2"});
@@ -74,8 +82,8 @@ To charge an access code
 //Add customer card information
 await this.paystack.addCard(cardNum, expiryMonth, expiryYear, cvv);
 
-//Set the access code retrieved from your server
-await this.paystack.setAccessCode(accessCode);
+//Set the access code retrieved from your web server
+await this.paystack.setAccessCode({accessCode});
 
 //Call chargeCard to charge the card
 const chargeResponse = await this.paystack.chargeCard();
@@ -87,8 +95,8 @@ To get a card type
 const cardInfo = await this.paystack.getCardType()
 console.log(cardInfo.card_type) //"Visa", "Mastercard", e.t.c
 ```
-### Code example (iOS)
-Coming soon
+## Note
+`validateCard()` is currently unavailable on iOS
 
 ## Running the tests
 Tests are not yet setup
