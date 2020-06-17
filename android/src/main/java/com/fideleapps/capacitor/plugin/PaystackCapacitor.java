@@ -171,7 +171,6 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void chargeCard(final PluginCall call) {
-        this.charge = new Charge();
         charge.setCard(this.card); //sets the card to charge
         charge.setAmount(this.amount);
         charge.setEmail(this.email);
