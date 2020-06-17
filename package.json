@@ -1,6 +1,6 @@
 {
   "name": "@bot101/capacitor-paystack-plugin",
-  "version": "0.0.4-alpha",
+  "version": "0.0.5-alpha",
   "description": "Paystack capacitor plugin for Android and iOS",
   "main": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
