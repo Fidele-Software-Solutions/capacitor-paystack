@@ -21,28 +21,28 @@ export class PaystackPlugin implements PaystackCapacitorPlugin {
         return PaystackCapacitor.putChargeCustomFields(customFields);
     }
 
-    setChargeEmail(email: string): Promise<any> {
-        return PaystackCapacitor.setChargeEmail({email});
+    setChargeEmail(payload: {email: string}): Promise<any> {
+        return PaystackCapacitor.setChargeEmail(payload);
     }
 
-    setAccessCode(accessCode: string): Promise<any> {
-        return PaystackCapacitor.setAccessCode({accessCode});
+    setAccessCode(payload: {accessCode: string}): Promise<any> {
+        return PaystackCapacitor.setAccessCode(payload);
     }
 
-    setChargeAmount(amount: string): Promise<any> {
-        return PaystackCapacitor.setChargeAmount({amount});
+    setChargeAmount(payload: {amount: string}): Promise<any> {
+        return PaystackCapacitor.setChargeAmount(payload);
     }
 
-    initialize(publicKey: string): Promise<{ initialized: boolean; }> {
-        return PaystackCapacitor.initialize({publicKey});
+    initialize(payload: {publicKey: string}): Promise<{ initialized: boolean; }> {
+        return PaystackCapacitor.initialize(payload);
     }
 
-    addCard(cardNumber: string, expiryMonth: string, expiryYear: string, cvv: string): Promise<any> {
+    addCard(payload: {cardNumber: string, expiryMonth: string, expiryYear: string, cvv: string}): Promise<any> {
         const cardData = {
-            cardNumber,
-            expiryMonth,
-            expiryYear,
-            cvv
+            cardNumber: payload.cardNumber,
+            expiryMonth: payload.expiryMonth,
+            expiryYear: payload.expiryYear,
+            cvv: payload.cvv
         }
         return PaystackCapacitor.addCard(cardData);
     }
