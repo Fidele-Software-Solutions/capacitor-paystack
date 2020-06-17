@@ -1,5 +1,5 @@
 # Paystack Capacitor Plugin
-A Paystack capacitor plugin for Android and iOS (coming soon)
+A Paystack capacitor plugin for Android and iOS
 
 ## Getting Started
 
