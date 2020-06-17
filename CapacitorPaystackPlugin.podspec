@@ -1,6 +1,6 @@
 
   Pod::Spec.new do |s|
-    s.name = 'CapacitorPaystackPlugin'
+    s.name = 'Bot101CapacitorPaystackPlugin'
     s.version = '0.0.1'
     s.summary = 'Paystack capacitor plugin for Android and iOS'
     s.license = 'MIT'
