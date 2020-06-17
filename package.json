@@ -13,7 +13,7 @@
   "author": "Okafor Ikenna",
   "license": "MIT",
   "dependencies": {
-    "@capacitor/core": "latest"
+    "@capacitor/core": "~2.1.0"
   },
   "devDependencies": {
     "rimraf": "^3.0.0",
