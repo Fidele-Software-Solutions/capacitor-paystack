@@ -3,4 +3,4 @@ node_modules/*
 /nbproject/private/
 /android/build/*
 /dist/*
-*.xcuserstate
+/ios/xcuserata/*
