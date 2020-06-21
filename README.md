@@ -5,8 +5,6 @@ A Paystack capacitor plugin for Android and iOS
 
 This plugin enables seamless integration of the [Paystack SDK](https://github.com/PaystackHQ/paystack-android) into a [Capacitor](https://capacitor.ionicframework.com/) application.
 
-The project is still under active development and will soon be available on iOS. Also, pull requests are welcome.
-
 ### Installation
 
 To install this plugin, run the NPM command below in your Capacitor project's root folder
