@@ -1,3 +1,3 @@
 export * from './definitions';
-export * from "./plugin";
+export * from "./Plugin";
 // export * from './web';
