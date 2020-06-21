@@ -45,7 +45,7 @@ import { PaystackPlugin } from '@bot101/capacitor-paystack-plugin';
 //Create a paystack object
 const paystack: PaystackPlugin; = new PaystackPlugin();
 
-//Initialize the SDK with your Paystack public key (found in your account dashboard)
+//Initialize the SDK with your Paystack public key (found in your Paystack developer account dashboard)
 await this.paystack.initialize({publicKey: "pk_public key here"});
 
 //Add customer card information
@@ -57,7 +57,7 @@ await this.paystack.addCard({
 });
 
 //Add the email to charge
-await this.paystack.setChargeEmail("email@address.com");
+await this.paystack.setChargeEmail({email: "email@address.com"});
 
 //Set the amount to charge the card (in kobo)
 await this.paystack.setChargeAmount({amount: '1000000'});
@@ -78,7 +78,12 @@ To charge an access code
 //After initializing the plugin as detailed above
 
 //Add customer card information
-await this.paystack.addCard(cardNum, expiryMonth, expiryYear, cvv);
+await this.paystack.addCard({
+  cardNumber: String(cardNumber),
+  expiryMonth: String(expiryMonth),
+  expiryYear: String(expiryYear),
+  cvv: String(cvv)
+});
 
 //Set the access code retrieved from your web server
 await this.paystack.setAccessCode({accessCode});
