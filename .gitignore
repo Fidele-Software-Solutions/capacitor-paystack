@@ -3,3 +3,4 @@ node_modules/*
 /nbproject/private/
 /android/build/*
 /dist/*
+/ios/Plugin.xcworkspace/xcuserdata/*
