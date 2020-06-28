@@ -46,7 +46,20 @@ public class PaystackCapacitor: CAPPlugin {
     
     @objc func validateCard(_ call: CAPPluginCall) {
         // TODO: Fix issue
-        return call.error("This functionality is currently not available on iOS")
+        let validationState = PSTCKCardValidator.validationState(forCard: cardParams)
+        switch validationState {
+             case .valid:
+                call.success(["is_valid": true])
+                break
+             case .invalid:
+                call.success(["is_valid": false])
+                break
+             case .incomplete:
+                call.success(["is_valid": false])
+                break
+
+        }
+        return call.success(["is_valid": false])
     }
     
     @objc func addChargeParameters(_ call: CAPPluginCall) {
