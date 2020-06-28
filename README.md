@@ -99,7 +99,7 @@ const cardInfo = await this.paystack.getCardType()
 console.log(cardInfo.card_type) //"Visa", "Mastercard", e.t.c
 ```
 ## Note
-`validateCard()` is currently unavailable on iOS
+None
 
 ## Running the tests
 Tests are not yet setup
