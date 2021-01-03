@@ -58,6 +58,7 @@ export interface PaystackCapacitorPlugin {
   addCard(payload: {cardNumber: string, expiryMonth: string, expiryYear: string, cvv: string}): Promise<any>;
   validateCard(): Promise<{is_valid: boolean}>;
   chargeCard(): Promise<Transaction>;
+  chargeToken(): Promise<Transaction>;
   addChargeParameters(parameters: {[key: string]: string}): Promise<any>;
   getCardType(): Promise<{card_type: string}>;
   putChargeMetadata(metadata: {[key: string]: string}): Promise<any>;

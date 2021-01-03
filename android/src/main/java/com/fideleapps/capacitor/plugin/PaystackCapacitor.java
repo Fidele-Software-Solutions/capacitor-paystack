@@ -171,25 +171,56 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void chargeCard(final PluginCall call) {
-        charge.setCard(this.card); //sets the card to charge
-        charge.setAmount(this.amount);
-        charge.setEmail(this.email);
-        PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
-            @Override
-            public void onSuccess(Transaction transaction) {
-                JSObject ret = new JSObject();
-                ret.put("reference", transaction.getReference());
-                call.success(ret);
-            }
+        try {
+            charge.setCard(this.card); //sets the card to charge
+            charge.setAmount(this.amount);
+            charge.setEmail(this.email);
+            PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
+                @Override
+                public void onSuccess(Transaction transaction) {
+                    JSObject ret = new JSObject();
+                    ret.put("reference", transaction.getReference());
+                    call.success(ret);
+                }
 
-            @Override
-            public void beforeValidate(Transaction transaction) {
-            }
+                @Override
+                public void beforeValidate(Transaction transaction) {
+                }
 
-            @Override
-            public void onError(Throwable error, Transaction transaction) {
-                call.errorCallback(error.getMessage());
-            }
-        });
+                @Override
+                public void onError(Throwable error, Transaction transaction) {
+                    call.errorCallback(error.getMessage());
+                }
+            });
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
+    }
+
+    @PluginMethod()
+    public void chargeToken(final PluginCall call) {
+        try {
+            charge.setCard(this.card); //sets the card to charge
+            charge.setEmail(this.email);
+            PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
+                @Override
+                public void onSuccess(Transaction transaction) {
+                    JSObject ret = new JSObject();
+                    ret.put("reference", transaction.getReference());
+                    call.success(ret);
+                }
+
+                @Override
+                public void beforeValidate(Transaction transaction) {
+                }
+
+                @Override
+                public void onError(Throwable error, Transaction transaction) {
+                    call.errorCallback(error.getMessage());
+                }
+            });
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
     }
 }

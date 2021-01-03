@@ -55,4 +55,8 @@ export class PaystackPlugin implements PaystackCapacitorPlugin {
         return PaystackCapacitor.chargeCard();
     }
 
+    chargeToken(): Promise<Transaction> { 
+        return PaystackCapacitor.chargeToken();
+    }
+
 }

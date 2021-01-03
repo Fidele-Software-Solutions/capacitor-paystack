@@ -143,4 +143,18 @@ public class PaystackCapacitor: CAPPlugin {
                 call.success(["reference": reference])
         })
     }
+
+    @objc func chargeToken(_ call: CAPPluginCall) {
+        self.charge.email = self.email
+        self.charge.currency = "NGN"
+        PSTCKAPIClient.shared().chargeCard(self.cardParams, forTransaction: self.charge, on: self.bridge.viewController,
+               didEndWithError: { (error, reference) -> Void in
+                call.error("\(error)")
+            }, didRequestValidation: { (reference) -> Void in
+                // an OTP was requested, transaction has not yet succeeded
+            }, didTransactionSuccess: { (reference) -> Void in
+                // transaction may have succeeded, please verify on backend
+                call.success(["reference": reference])
+        })
+    }
 }
