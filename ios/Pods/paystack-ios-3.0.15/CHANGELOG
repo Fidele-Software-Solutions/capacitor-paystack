@@ -1,0 +1,47 @@
+=== 3.0.13 2019-11-4
+
+* Updates deprecated class UIWebView to WKWebView
+
+=== 3.0.6 2019-03-29
+
+* Change title and placeholder of OTP dialog
+
+=== 3.0.5 2018-04-13
+
+* Allow adding an NSMutableDictionary or an NSMutableArray directly to metadata
+
+=== 3.0.4 2017-05-25
+
+* Hotfix Ensure we notify caller when showing or dismissing our dialogs
+
+=== 3.0.3 2017-05-24
+
+* Hotfix Ensure we notify caller when showing or dismissing our dialogs
+
+=== 2.1.1 2016-12-08
+
+* Hotfix Add TransactionParams to PaystackIOSStatic's headers
+
+=== 2.1.1 2016-11-13
+
+* Add plan and currency
+
+Add plan and currency support
+
+=== 2.1.0 2016-11-13
+
+* Add Metadata
+
+Add Metadata support
+
+=== 2.0.0 2016-10-22
+
+* Charge Cards
+
+Add Charge Cards functionality
+
+=== 1.0.0 2016-03-03
+
+* Initial release
+
+Special thanks to: the Stripe iOS team. This was built based on their library at http://github.com/stripe/stripe-ios .

@@ -1,0 +1,517 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		042CA41D1A685E8D00D778E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CA4141A685E8D00D778E7 /* AppDelegate.swift */; };
+		042CA41F1A685E8D00D778E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 042CA4171A685E8D00D778E7 /* Main.storyboard */; };
+		042CA4201A685E8D00D778E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 042CA4191A685E8D00D778E7 /* Images.xcassets */; };
+		042CA4221A685E8D00D778E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042CA41C1A685E8D00D778E7 /* ViewController.swift */; };
+		10DAC7941C896BB300855971 /* Paystack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10DAC7921C896BAC00855971 /* Paystack.framework */; };
+		10DAC7951C896BB300855971 /* Paystack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 10DAC7921C896BAC00855971 /* Paystack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		10FC52021C88D40A004A0733 /* Paystack iOS Example.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 10FC52011C88D40A004A0733 /* Paystack iOS Example.entitlements */; };
+		C11745DF1C456D6D0029936F /* PSTCKPaymentCardTextFieldUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C11745DE1C456D6D0029936F /* PSTCKPaymentCardTextFieldUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C11745D81C456C730029936F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 04823F701A6849200098400B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 04823F771A6849200098400B;
+			remoteInfo = "Paystack iOS Example (Simple)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		10DAC7961C896BB300855971 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				10DAC7951C896BB300855971 /* Paystack.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		042CA4141A685E8D00D778E7 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		042CA4181A685E8D00D778E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		042CA4191A685E8D00D778E7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		042CA41A1A685E8D00D778E7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		042CA41C1A685E8D00D778E7 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		04823F781A6849200098400B /* Paystack iOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Paystack iOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		10DAC7921C896BAC00855971 /* Paystack.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Paystack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		10FC52011C88D40A004A0733 /* Paystack iOS Example.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Paystack iOS Example.entitlements"; sourceTree = "<group>"; };
+		C11745D31C456C730029936F /* Paystack iOS Application Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Paystack iOS Application Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C11745D71C456C730029936F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C11745DD1C456D6D0029936F /* Paystack iOS Application Tests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Paystack iOS Application Tests-Bridging-Header.h"; sourceTree = "<group>"; };
+		C11745DE1C456D6D0029936F /* PSTCKPaymentCardTextFieldUITests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSTCKPaymentCardTextFieldUITests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		04823F751A6849200098400B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10DAC7941C896BB300855971 /* Paystack.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C11745D01C456C730029936F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		042CA4131A685E8D00D778E7 /* Paystack iOS Example */ = {
+			isa = PBXGroup;
+			children = (
+				10FC52011C88D40A004A0733 /* Paystack iOS Example.entitlements */,
+				042CA41A1A685E8D00D778E7 /* Info.plist */,
+				042CA4141A685E8D00D778E7 /* AppDelegate.swift */,
+				042CA41C1A685E8D00D778E7 /* ViewController.swift */,
+				042CA4191A685E8D00D778E7 /* Images.xcassets */,
+				042CA4171A685E8D00D778E7 /* Main.storyboard */,
+			);
+			path = "Paystack iOS Example";
+			sourceTree = "<group>";
+		};
+		04823F6F1A6849200098400B = {
+			isa = PBXGroup;
+			children = (
+				042CA4131A685E8D00D778E7 /* Paystack iOS Example */,
+				C11745D41C456C730029936F /* Paystack iOS Application Tests */,
+				04823F9F1A6849850098400B /* Frameworks */,
+				04823F791A6849200098400B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		04823F791A6849200098400B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				04823F781A6849200098400B /* Paystack iOS Example.app */,
+				C11745D31C456C730029936F /* Paystack iOS Application Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		04823F9F1A6849850098400B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				10DAC7921C896BAC00855971 /* Paystack.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C11745D41C456C730029936F /* Paystack iOS Application Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C11745DE1C456D6D0029936F /* PSTCKPaymentCardTextFieldUITests.m */,
+				C11745D71C456C730029936F /* Info.plist */,
+				C11745DD1C456D6D0029936F /* Paystack iOS Application Tests-Bridging-Header.h */,
+			);
+			path = "Paystack iOS Application Tests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		04823F771A6849200098400B /* Paystack iOS Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04823F971A6849200098400B /* Build configuration list for PBXNativeTarget "Paystack iOS Example" */;
+			buildPhases = (
+				04823F741A6849200098400B /* Sources */,
+				04823F751A6849200098400B /* Frameworks */,
+				04823F761A6849200098400B /* Resources */,
+				10DAC7961C896BB300855971 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Paystack iOS Example";
+			productName = "Paystack iOS Exampe (Simple)";
+			productReference = 04823F781A6849200098400B /* Paystack iOS Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C11745D21C456C730029936F /* Paystack iOS Application Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C11745DC1C456C730029936F /* Build configuration list for PBXNativeTarget "Paystack iOS Application Tests" */;
+			buildPhases = (
+				C11745CF1C456C730029936F /* Sources */,
+				C11745D01C456C730029936F /* Frameworks */,
+				C11745D11C456C730029936F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C11745D91C456C730029936F /* PBXTargetDependency */,
+			);
+			name = "Paystack iOS Application Tests";
+			productName = "Paystack iOS Application Tests";
+			productReference = C11745D31C456C730029936F /* Paystack iOS Application Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		04823F701A6849200098400B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 1030;
+				ORGANIZATIONNAME = Paystack;
+				TargetAttributes = {
+					04823F771A6849200098400B = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = VZCEZ65JNX;
+						LastSwiftMigration = 1030;
+						SystemCapabilities = {
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.OMC = {
+								enabled = 1;
+							};
+							com.apple.Passbook = {
+								enabled = 0;
+							};
+						};
+					};
+					C11745D21C456C730029936F = {
+						CreatedOnToolsVersion = 7.2;
+						LastSwiftMigration = 0800;
+						TestTargetID = 04823F771A6849200098400B;
+					};
+				};
+			};
+			buildConfigurationList = 04823F731A6849200098400B /* Build configuration list for PBXProject "Paystack iOS Example" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 04823F6F1A6849200098400B;
+			productRefGroup = 04823F791A6849200098400B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				04823F771A6849200098400B /* Paystack iOS Example */,
+				C11745D21C456C730029936F /* Paystack iOS Application Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		04823F761A6849200098400B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				042CA4201A685E8D00D778E7 /* Images.xcassets in Resources */,
+				042CA41F1A685E8D00D778E7 /* Main.storyboard in Resources */,
+				10FC52021C88D40A004A0733 /* Paystack iOS Example.entitlements in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C11745D11C456C730029936F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04823F741A6849200098400B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				042CA4221A685E8D00D778E7 /* ViewController.swift in Sources */,
+				042CA41D1A685E8D00D778E7 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C11745CF1C456C730029936F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C11745DF1C456D6D0029936F /* PSTCKPaymentCardTextFieldUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C11745D91C456C730029936F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 04823F771A6849200098400B /* Paystack iOS Example */;
+			targetProxy = C11745D81C456C730029936F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		042CA4171A685E8D00D778E7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				042CA4181A685E8D00D778E7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		04823F951A6849200098400B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Paystack iOS Example (Simple)/Paystack iOS Example (Simple)-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+			};
+			name = Debug;
+		};
+		04823F961A6849200098400B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Paystack iOS Example (Simple)/Paystack iOS Example (Simple)-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		04823F981A6849200098400B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Paystack iOS Example/Paystack iOS Example.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 17;
+				DEVELOPMENT_TEAM = VZCEZ65JNX;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Paystack iOS Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.0.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.paystack.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "Paystack iOS Example";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		04823F991A6849200098400B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Paystack iOS Example/Paystack iOS Example.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 17;
+				DEVELOPMENT_TEAM = VZCEZ65JNX;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Paystack iOS Example/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 3.0.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.paystack.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "Paystack iOS Example";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C11745DA1C456C730029936F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Paystack iOS Application Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.paystack.Paystack-iOS-Application-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Paystack iOS Application Tests/Paystack iOS Application Tests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Paystack iOS Example.app/Paystack iOS Example";
+			};
+			name = Debug;
+		};
+		C11745DB1C456C730029936F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Paystack iOS Application Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.paystack.Paystack-iOS-Application-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Paystack iOS Application Tests/Paystack iOS Application Tests-Bridging-Header.h";
+				SWIFT_VERSION = 2.3;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Paystack iOS Example.app/Paystack iOS Example";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		04823F731A6849200098400B /* Build configuration list for PBXProject "Paystack iOS Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04823F951A6849200098400B /* Debug */,
+				04823F961A6849200098400B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04823F971A6849200098400B /* Build configuration list for PBXNativeTarget "Paystack iOS Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04823F981A6849200098400B /* Debug */,
+				04823F991A6849200098400B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C11745DC1C456C730029936F /* Build configuration list for PBXNativeTarget "Paystack iOS Application Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C11745DA1C456C730029936F /* Debug */,
+				C11745DB1C456C730029936F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 04823F701A6849200098400B /* Project object */;
+}
