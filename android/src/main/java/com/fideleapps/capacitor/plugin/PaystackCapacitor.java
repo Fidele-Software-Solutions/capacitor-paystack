@@ -5,12 +5,10 @@ import android.os.Build;
 import androidx.annotation.RequiresApi;
 
 import com.getcapacitor.JSObject;
-import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
-
-import org.json.JSONException;
+import com.getcapacitor.annotation.CapacitorPlugin;
 
 import java.util.function.Consumer;
 
@@ -20,7 +18,7 @@ import co.paystack.android.Transaction;
 import co.paystack.android.model.Card;
 import co.paystack.android.model.Charge;
 
-@NativePlugin()
+@CapacitorPlugin()
 public class PaystackCapacitor extends Plugin {
 
     Card card;
@@ -39,7 +37,7 @@ public class PaystackCapacitor extends Plugin {
             this.charge = null;
             JSObject ret = new JSObject();
             ret.put("initialized", true);
-            call.success(ret);
+            call.resolve(ret);
         } catch (Exception ex) {
             call.errorCallback(ex.getMessage());
         }
@@ -54,7 +52,7 @@ public class PaystackCapacitor extends Plugin {
             String cvv = call.getString("cvv");
             this.charge = new Charge();
             this.card = new Card(cardNumber, expiryMonth, expiryYear, cvv);
-            call.success();
+            call.resolve();
         } catch (Exception ex) {
             call.errorCallback(ex.getMessage());
         }
@@ -66,7 +64,7 @@ public class PaystackCapacitor extends Plugin {
         try {
             JSObject ret = new JSObject();
             ret.put("is_valid", card.isValid());
-            call.success(ret);
+            call.resolve(ret);
         } catch (Exception ex) {
             call.errorCallback(ex.getMessage());
         }
@@ -88,7 +86,7 @@ public class PaystackCapacitor extends Plugin {
 
             }
         });
-        call.success();
+        call.resolve();
     }
 
     @PluginMethod()
@@ -96,7 +94,7 @@ public class PaystackCapacitor extends Plugin {
         try {
             JSObject ret = new JSObject();
             ret.put("card_type", card.getType());
-            call.success(ret);
+            call.resolve(ret);
         } catch (NullPointerException ex) {
             call.errorCallback(ex.getMessage());
         }
@@ -117,7 +115,7 @@ public class PaystackCapacitor extends Plugin {
                 }
             }
         });
-        call.success();
+        call.resolve();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -134,14 +132,14 @@ public class PaystackCapacitor extends Plugin {
                 }
             }
         });
-        call.success();
+        call.resolve();
     }
 
     @PluginMethod()
     public void setChargeEmail(PluginCall call) {
         try {
             this.email = call.getString("email");
-            call.success();
+            call.resolve();
         } catch (Exception ex) {
             call.errorCallback(ex.getMessage());
         }
@@ -151,7 +149,7 @@ public class PaystackCapacitor extends Plugin {
     public void setChargeAmount(PluginCall call) {
         try {
             this.amount = Integer.parseInt(call.getString("amount"));
-            call.success();
+            call.resolve();
         } catch (Exception ex) {
             call.errorCallback(ex.getMessage());
         }
@@ -162,7 +160,7 @@ public class PaystackCapacitor extends Plugin {
         try {
             String accessCode = call.getString("accessCode");
             charge.setAccessCode(accessCode);
-            call.success();
+            call.resolve();
         } catch (NullPointerException ex) {
             call.errorCallback(ex.getMessage());
         }
@@ -171,25 +169,56 @@ public class PaystackCapacitor extends Plugin {
 
     @PluginMethod()
     public void chargeCard(final PluginCall call) {
-        charge.setCard(this.card); //sets the card to charge
-        charge.setAmount(this.amount);
-        charge.setEmail(this.email);
-        PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
-            @Override
-            public void onSuccess(Transaction transaction) {
-                JSObject ret = new JSObject();
-                ret.put("reference", transaction.getReference());
-                call.success(ret);
-            }
+        try {
+            charge.setCard(this.card); //sets the card to charge
+            charge.setAmount(this.amount);
+            charge.setEmail(this.email);
+            PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
+                @Override
+                public void onSuccess(Transaction transaction) {
+                    JSObject ret = new JSObject();
+                    ret.put("reference", transaction.getReference());
+                    call.resolve(ret);
+                }
 
-            @Override
-            public void beforeValidate(Transaction transaction) {
-            }
+                @Override
+                public void beforeValidate(Transaction transaction) {
+                }
 
-            @Override
-            public void onError(Throwable error, Transaction transaction) {
-                call.errorCallback(error.getMessage());
-            }
-        });
+                @Override
+                public void onError(Throwable error, Transaction transaction) {
+                    call.errorCallback(error.getMessage());
+                }
+            });
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
+    }
+
+    @PluginMethod()
+    public void chargeToken(final PluginCall call) {
+        try {
+            charge.setCard(this.card); //sets the card to charge
+            charge.setEmail(this.email);
+            PaystackSdk.chargeCard(getActivity(), charge, new Paystack.TransactionCallback() {
+                @Override
+                public void onSuccess(Transaction transaction) {
+                    JSObject ret = new JSObject();
+                    ret.put("reference", transaction.getReference());
+                    call.resolve(ret);
+                }
+
+                @Override
+                public void beforeValidate(Transaction transaction) {
+                }
+
+                @Override
+                public void onError(Throwable error, Transaction transaction) {
+                    call.errorCallback(error.getMessage());
+                }
+            });
+        } catch (Exception ex) {
+            call.errorCallback(ex.getMessage());
+        }
     }
 }

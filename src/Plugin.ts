@@ -1,7 +1,11 @@
 import { PaystackCapacitorPlugin, Transaction } from './definitions';
-import { Plugins } from '@capacitor/core';
+import { registerPlugin } from '@capacitor/core';
 
-const { PaystackCapacitor } = Plugins;
+const PaystackCapacitor = registerPlugin<PaystackCapacitorPlugin>('PaystackCapacitorPlugin', {
+    // web: () => import('./web').then(m => new m.MyCoolPluginWeb()),
+    // electron: () => ("./electron").then(m => new m.MyCoolPluginElectron())
+  });
+// const { PaystackCapacitor } = Plugins;
 
 export class PaystackPlugin implements PaystackCapacitorPlugin {
 
@@ -53,6 +57,10 @@ export class PaystackPlugin implements PaystackCapacitorPlugin {
 
     chargeCard(): Promise<Transaction> { 
         return PaystackCapacitor.chargeCard();
+    }
+
+    chargeToken(): Promise<Transaction> { 
+        return PaystackCapacitor.chargeToken();
     }
 
 }

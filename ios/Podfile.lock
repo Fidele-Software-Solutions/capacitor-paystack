@@ -1,10 +1,10 @@
 PODS:
-  - Capacitor (2.2.0):
+  - Capacitor (3.0.2):
     - CapacitorCordova
-  - CapacitorCordova (2.2.0)
-  - Paystack (3.0.13):
-    - Paystack/Core (= 3.0.13)
-  - Paystack/Core (3.0.13)
+  - CapacitorCordova (3.0.2)
+  - Paystack (3.0.17):
+    - Paystack/Core (= 3.0.17)
+  - Paystack/Core (3.0.17)
 
 DEPENDENCIES:
   - "Capacitor (from `../node_modules/@capacitor/ios`)"
@@ -22,10 +22,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@capacitor/ios"
 
 SPEC CHECKSUMS:
-  Capacitor: a8c89aa7384374b805ccc175b4a3374472b5941e
-  CapacitorCordova: a77bb95d31143546af63577154d9852d33c62a82
-  Paystack: b09ee1590bf6631d36eef48a73c8b7f6ba68f7b0
+  Capacitor: df6bc94955ecbe567904f1f2fe09c237f66d0de9
+  CapacitorCordova: e2f9a64e0b1a47b6efed76aecbd042c40b477ee3
+  Paystack: 5a7a9d5c47ddfd76e3d84550d9ff1f49bf6d284c
 
-PODFILE CHECKSUM: d278ff542c11bda71ad8989fc5760ae1c492070b
+PODFILE CHECKSUM: 057e3913277daa3cbbd5dbc94378c3510807923b
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1
