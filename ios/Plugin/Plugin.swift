@@ -25,7 +25,7 @@ public class PaystackCapacitor: CAPPlugin {
         Paystack.setDefaultPublicKey(self.publicKey)
         self.cardParams = nil
         self.charge = nil
-        call.success([
+        call.resolve([
             "initialized": true
         ])
     }
@@ -41,7 +41,7 @@ public class PaystackCapacitor: CAPPlugin {
         self.cardParams.expMonth = expiryMonth
         self.cardParams.expYear = expiryYear
         self.cardParams.cvc = cvv
-        call.success()
+        call.resolve()
     }
     
     @objc func validateCard(_ call: CAPPluginCall) {
@@ -49,17 +49,17 @@ public class PaystackCapacitor: CAPPlugin {
         let validationState = PSTCKCardValidator.validationState(forCard: cardParams)
         switch validationState {
              case .valid:
-                call.success(["is_valid": true])
+                call.resolve(["is_valid": true])
                 break
              case .invalid:
-                call.success(["is_valid": false])
+                call.resolve(["is_valid": false])
                 break
              case .incomplete:
-                call.success(["is_valid": false])
+                call.resolve(["is_valid": false])
                 break
-
+             default:
+                call.resolve(["is_valid": false])
         }
-        return call.success(["is_valid": false])
     }
     
     @objc func addChargeParameters(_ call: CAPPluginCall) {
@@ -68,9 +68,9 @@ public class PaystackCapacitor: CAPPlugin {
             if params != nil {
                 try self.charge.setMetadataValueDict(params!, forKey: "custom_filters")
             }
-            call.success()
+            call.resolve()
         } catch {
-            call.error("\(error)")
+            call.reject("\(error)")
         }
     }
     
@@ -80,7 +80,7 @@ public class PaystackCapacitor: CAPPlugin {
         card.cvc = self.cardParams.cvc
         card.expYear = self.cardParams.expYear
         card.expMonth = self.cardParams.expMonth
-        call.success([
+        call.resolve([
             "card_type": card.type
         ])
     }
@@ -93,10 +93,10 @@ public class PaystackCapacitor: CAPPlugin {
                 print(key as! String)
                 try self.charge.setMetadataValue(value as! String, forKey: key as! String)
             } catch {
-                call.error("\(error)")
+                call.reject("\(error)")
             }
         }
-        call.success()
+        call.resolve()
     }
     
     @objc func putChargeCustomFields(_ call: CAPPluginCall) {
@@ -107,54 +107,54 @@ public class PaystackCapacitor: CAPPlugin {
                 print(key as! String)
                 try self.charge.setCustomFieldValue(value as! String, displayedAs: key as! String)
             } catch {
-                call.error("\(error)")
+                call.reject("\(error)")
                 return
             }
         }
-        call.success()
+        call.resolve()
     }
     
     @objc func setChargeEmail(_ call: CAPPluginCall) {
         self.email = call.getString("email", "");
-        call.success()
+        call.resolve()
     }
     
     @objc func setChargeAmount(_ call: CAPPluginCall) {
-        self.amount = UInt(call.getString("amount", "0")!);
-        call.success()
+        self.amount = UInt(call.getString("amount", "0"));
+        call.resolve()
     }
     
     @objc func setAccessCode(_ call: CAPPluginCall) {
-        self.charge.access_code = call.getString("accessCode", "")!;
-        call.success()
+        self.charge.access_code = call.getString("accessCode", "");
+        call.resolve()
     }
     
     @objc func chargeCard(_ call: CAPPluginCall) {
         self.charge.amount = self.amount
         self.charge.email = self.email
         self.charge.currency = "NGN"
-        PSTCKAPIClient.shared().chargeCard(self.cardParams, forTransaction: self.charge, on: self.bridge.viewController,
+        PSTCKAPIClient.shared().chargeCard(self.cardParams, forTransaction: self.charge, on: (self.bridge?.viewController)!,
                didEndWithError: { (error, reference) -> Void in
-                call.error("\(error)")
+                call.reject("\(error)")
             }, didRequestValidation: { (reference) -> Void in
                 // an OTP was requested, transaction has not yet succeeded
             }, didTransactionSuccess: { (reference) -> Void in
                 // transaction may have succeeded, please verify on backend
-                call.success(["reference": reference])
+                call.resolve(["reference": reference])
         })
     }
 
     @objc func chargeToken(_ call: CAPPluginCall) {
         self.charge.email = self.email
         self.charge.currency = "NGN"
-        PSTCKAPIClient.shared().chargeCard(self.cardParams, forTransaction: self.charge, on: self.bridge.viewController,
+        PSTCKAPIClient.shared().chargeCard(self.cardParams, forTransaction: self.charge, on: (self.bridge?.viewController)!,
                didEndWithError: { (error, reference) -> Void in
-                call.error("\(error)")
+                call.reject("\(error)")
             }, didRequestValidation: { (reference) -> Void in
                 // an OTP was requested, transaction has not yet succeeded
             }, didTransactionSuccess: { (reference) -> Void in
                 // transaction may have succeeded, please verify on backend
-                call.success(["reference": reference])
+                call.resolve(["reference": reference])
         })
     }
 }
