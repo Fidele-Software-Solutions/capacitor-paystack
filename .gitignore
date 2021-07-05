@@ -4,3 +4,4 @@ node_modules/*
 /android/build/*
 /dist/*
 /ios/Plugin.xcworkspace/xcuserdata/*
+ios/Plugin.xcworkspace/xcuserdata/ikennaokafor.xcuserdatad/UserInterfaceState.xcuserstate
