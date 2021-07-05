@@ -24,9 +24,9 @@
 //    NSLog(@"%@",postData);
     
     [[apiClient.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable body, __unused NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        NSDictionary *jsonDictionary = body ? [NSJSONSerialization JSONObjectWithData:body options:0 error:NULL] : nil;
+        NSError *someerror;
+        NSDictionary *jsonDictionary = body ? [NSJSONSerialization JSONObjectWithData:body options:NSJSONReadingAllowFragments error:&someerror] : nil;
         NSString *bodyString = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
-
         id<PSTCKAPIResponseDecodable> responseObject = [[serializer class] decodedObjectFromAPIResponse:jsonDictionary];
         NSError *returnedError = error;
         if (!responseObject && !returnedError) {

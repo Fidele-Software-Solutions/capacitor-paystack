@@ -87,6 +87,13 @@ FOUNDATION_EXPORT NSString * PSTCKQueryStringFromParameters(NSDictionary *parame
     return [[NSString stringWithFormat:@"%@&%@&%@&%@&%@", urlencodedcard, urlencodedtransaction, urlencodedhandle, urlencodedpublickey, urlencodeddevice] dataUsingEncoding:NSUTF8StringEncoding];
 }
 
++ (NSData *)formEncryptedDataForDict:(NSDictionary *)dict usePublicKey:(NSString *)public_key onThisDevice:(NSString *)device_id {
+    NSString *encodedDict = PSTCKQueryStringFromParameters(dict);
+    NSString *urlencodedpublickey = [[[PSTCKQueryStringPair alloc] initWithField:@"public_key" value:public_key] URLEncodedStringValue];
+    NSString *urlencodeddevice = [[[PSTCKQueryStringPair alloc] initWithField:@"device" value:device_id] URLEncodedStringValue];
+    return [[NSString stringWithFormat:@"%@&%@&%@", encodedDict, urlencodedpublickey, urlencodeddevice] dataUsingEncoding:NSUTF8StringEncoding];
+}
+
 + (nonnull NSData *)formEncodedDataForObject:(nonnull NSObject<PSTCKFormEncodable> *)object
                                 usePublicKey:(nonnull NSString *)public_key
                                 onThisDevice:(nonnull NSString *)device_id {

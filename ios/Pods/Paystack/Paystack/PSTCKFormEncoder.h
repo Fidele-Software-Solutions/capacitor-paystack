@@ -26,6 +26,10 @@
                                 usePublicKey:(nonnull NSString *)public_key
                                 onThisDevice:(nonnull NSString *)device_id;
 
++ (nonnull NSData *)formEncryptedDataForDict:(nonnull NSDictionary *)dict
+  usePublicKey:(nonnull NSString *)public_key
+  onThisDevice:(nonnull NSString *)device_id;
+
 + (nonnull NSString *)stringByURLEncoding:(nonnull NSString *)string;
 
 + (nonnull NSString *)stringByReplacingSnakeCaseWithCamelCase:(nonnull NSString *)input;

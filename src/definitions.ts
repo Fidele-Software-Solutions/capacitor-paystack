@@ -1,10 +1,10 @@
-// @ts-ignore
-declare module "@capacitor/core" {
-  interface PluginRegistry {
-    PaystackCapacitor: PaystackCapacitorPlugin;
-    // PaystackCharge: PaystackCharge;
-  }
-}
+// @ t s-ignore
+// declare module "@capacitor/core" {
+  // interface PluginRegistry {
+  //   PaystackCapacitor: PaystackCapacitorPlugin;
+  //   // PaystackCharge: PaystackCharge;
+  // }
+// }
 
 export enum BearerEnum {
   ACCOUNT = "ACCOUNT",
